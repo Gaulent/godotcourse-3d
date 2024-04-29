@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://drwi62rfkuq2t"]
+
+[ext_resource type="Script" path="res://Scripts/RotatingWall.gd" id="1_b0qes"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y5fuv"]
+size = Vector3(0.15, 1, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yu4xc"]
+resource_local_to_scene = true
+albedo_color = Color(0, 0.756863, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fd546"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_yu4xc")
+size = Vector3(0.15, 1, 2.5)
+
+[node name="RotatingWall" type="AnimatableBody3D"]
+script = ExtResource("1_b0qes")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570508, 0)
+shape = SubResource("BoxShape3D_y5fuv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.570508, 0)
+mesh = SubResource("BoxMesh_fd546")

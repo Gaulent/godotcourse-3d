@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm2xryq8v4rao"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_yparu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m4mqm"]
+size = Vector3(1.5, 0.3, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahhqu"]
+albedo_color = Color(0.933333, 0.929412, 0.129412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_84kv7"]
+material = SubResource("StandardMaterial3D_ahhqu")
+size = Vector3(1.5, 0.3, 1.5)
+
+[node name="Player" type="CharacterBody3D"]
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_yparu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190169, 0)
+shape = SubResource("BoxShape3D_m4mqm")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190169, 0)
+mesh = SubResource("BoxMesh_84kv7")
+skeleton = NodePath("../..")

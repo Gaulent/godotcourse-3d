@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmikcfwoflmkg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nxeav"]
+rough = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q63sj"]
+albedo_color = Color(0.384314, 0.603922, 0.403922, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ua1kc"]
+material = SubResource("StandardMaterial3D_q63sj")
+size = Vector2(20, 20)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_03v2c"]
+
+[node name="Floor" type="StaticBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_nxeav")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ua1kc")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("WorldBoundaryShape3D_03v2c")

@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://74qfimcy44ma"]
+
+[ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_ba1su"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_px3xl"]
+[ext_resource type="PackedScene" uid="uid://dmikcfwoflmkg" path="res://Scenes/World/floor.tscn" id="3_nf2t8"]
+[ext_resource type="PackedScene" uid="uid://cm2xryq8v4rao" path="res://Scenes/player.tscn" id="4_phqjt"]
+[ext_resource type="PackedScene" uid="uid://drwi62rfkuq2t" path="res://Scenes/World/rotating_wall.tscn" id="6_wmgku"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g7cmy"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_rkxwt"]
+sky_material = SubResource("ProceduralSkyMaterial_g7cmy")
+
+[sub_resource type="Environment" id="Environment_f4utn"]
+background_mode = 2
+sky = SubResource("Sky_rkxwt")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_px3xl")
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="UIManager" type="Control" parent="Managers"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ba1su")
+
+[node name="Label" type="Label" parent="Managers/UIManager"]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 13.0
+offset_right = 153.0
+offset_bottom = 104.0
+theme_override_colors/font_color = Color(0.647059, 0, 0, 1)
+theme_override_font_sizes/font_size = 55
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f4utn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.878817, -0.477159, -3.12839e-08, -1.29258e-08, -4.17565e-08, 1, -0.477159, 0.878817, 3.05287e-08, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" parent="." instance=ExtResource("3_nf2t8")]
+
+[node name="Player" parent="." instance=ExtResource("4_phqjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.61629, 0, 8.03271)
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 10, 6.265)
+fov = 45.0
+
+[node name="RotatingWall" parent="." instance=ExtResource("6_wmgku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40675, 0, 7.71293)
+constant_angular_velocity = Vector3(0.261799, 0.261799, 0.261799)
