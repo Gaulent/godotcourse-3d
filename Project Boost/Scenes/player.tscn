@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://qtty1m3xisd3"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_i3sm6"]
+[ext_resource type="AudioStream" uid="uid://7vjxsmslkhge" path="res://Assets/SFX - Main engine thrust.ogg" id="2_l053v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4r1a"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_32158"]
+material = SubResource("StandardMaterial3D_g4r1a")
+size = Vector3(0.3, 1, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0rob"]
+albedo_color = Color(1, 0.0784314, 0.121569, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8lp26"]
+material = SubResource("StandardMaterial3D_b0rob")
+size = Vector3(0.15, 0.5, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_34101"]
+size = Vector3(0.449451, 1.25293, 0.3)
+
+[sub_resource type="Gradient" id="Gradient_1ly51"]
+offsets = PackedFloat32Array(0, 0.394737)
+colors = PackedColorArray(0.858824, 0.690196, 0, 0.94902, 0.858824, 0.231373, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7v05a"]
+gradient = SubResource("Gradient_1ly51")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.106742)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhhpq"]
+transparency = 1
+albedo_texture = SubResource("GradientTexture2D_7v05a")
+
+[sub_resource type="QuadMesh" id="QuadMesh_dldem"]
+material = SubResource("StandardMaterial3D_bhhpq")
+
+[node name="Player" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70189, 0)
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+gravity_scale = 0.5
+script = ExtResource("1_i3sm6")
+ROTATION_SPEED = 3.0
+THRUSTER = 20.0
+MAX_SPEED = 50.0
+
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.128404, 0)
+mesh = SubResource("BoxMesh_32158")
+skeleton = NodePath("../../..")
+
+[node name="LeftThrust" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, -0.371596, 0)
+mesh = SubResource("BoxMesh_8lp26")
+skeleton = NodePath("../../..")
+
+[node name="RightThrust" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, -0.371596, 0)
+mesh = SubResource("BoxMesh_8lp26")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_34101")
+
+[node name="AudioThruster" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_l053v")
+
+[node name="Thurster" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.328, 0)
+emitting = false
+lifetime = 0.3
+mesh = SubResource("QuadMesh_dldem")
