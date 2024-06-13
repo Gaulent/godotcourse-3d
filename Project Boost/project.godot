@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Project Boost"
-run/main_scene="res://node_3d.tscn"
+run/main_scene="res://Scenes/Level_1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+LevelManager="*res://Scenes/level_manager.tscn"
 
 [dotnet]
 

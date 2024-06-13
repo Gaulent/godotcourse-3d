@@ -1,8 +1,12 @@
+class_name Player
 extends RigidBody3D
 
 @export var ROTATION_SPEED: float = 10.0
 @export var THRUSTER: float = 10.0
 @export var MAX_SPEED: float = 10.0
+
+func _ready() -> void:
+	body_entered.connect(impact)
 
 func _physics_process(delta):
 	# Handle jump.
@@ -20,11 +24,8 @@ func _physics_process(delta):
 	
 	linear_velocity = linear_velocity.limit_length(MAX_SPEED)
 	
-	var coliders: Array[Node3D] = get_colliding_bodies()
-	for colider in coliders:
-		if colider.is_in_group("Obstacle"):
-			die()
-			
-			
-func die():
-	pass
+
+func impact(body: Node):
+	if body.is_in_group("Obstacle"):
+		call_deferred("set_contact_monitor", false)
+		LevelManager.reset_level()

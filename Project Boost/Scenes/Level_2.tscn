@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://d32c2wf8la6b4"]
+
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="1_5ts83"]
+[ext_resource type="PackedScene" uid="uid://qtty1m3xisd3" path="res://Scenes/Objects/player.tscn" id="2_drsbm"]
+[ext_resource type="Script" path="res://Scripts/AnimatedWall.gd" id="4_6k2fs"]
+[ext_resource type="PackedScene" uid="uid://c8ef2stuwtxne" path="res://Scenes/Objects/finish.tscn" id="4_p46of"]
+[ext_resource type="PackedScene" uid="uid://bjl6hrdip7gk2" path="res://Scenes/Objects/obstacle.tscn" id="4_s3nxb"]
+[ext_resource type="PackedScene" uid="uid://10yvb4y37rex" path="res://Scenes/Objects/start.tscn" id="5_0evnm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pbvk3"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_jf4vv"]
+sky_material = SubResource("ProceduralSkyMaterial_pbvk3")
+
+[sub_resource type="Environment" id="Environment_vyay0"]
+background_mode = 2
+sky = SubResource("Sky_jf4vv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_75d5o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlqof"]
+albedo_color = Color(0.278431, 0.313726, 0.270588, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5ntg1"]
+material = SubResource("StandardMaterial3D_dlqof")
+size = Vector2(200, 200)
+
+[node name="Level 1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vyay0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75, 0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.990329, 0.138741, 0, -0.138741, 0.990329, 0, 5.41343, 20)
+fov = 45.0
+script = ExtResource("1_5ts83")
+target = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_drsbm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8338, 4.57751, 0)
+max_contacts_reported = 1
+contact_monitor = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_75d5o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_5ntg1")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Obstacle" parent="World" instance=ExtResource("4_s3nxb")]
+transform = Transform3D(40, 0, 0, 0, 1.542, 0, 0, 0, 12.132, 0, 0, 0)
+
+[node name="Obstacle5" parent="World" instance=ExtResource("4_s3nxb")]
+transform = Transform3D(52.0715, 0, 0, 0, 1.54208, 0, 0, 0, 12.1326, 1.38581, 27.6212, 0)
+
+[node name="Obstacle2" parent="World" instance=ExtResource("4_s3nxb")]
+transform = Transform3D(-1.74845e-06, -1.542, 0, 40, -6.74029e-08, 0, 0, 0, 12.132, -4.79974, 6.90417, -12.1984)
+script = ExtResource("4_6k2fs")
+
+[node name="Waypoint" type="Node3D" parent="World/Obstacle2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.977045)
+
+[node name="Obstacle3" parent="World" instance=ExtResource("4_s3nxb")]
+transform = Transform3D(-1.74845e-06, -1.542, 0, 40, -6.74029e-08, 0, 0, 0, 12.132, 7.85577, 6.90417, 0.328397)
+script = ExtResource("4_6k2fs")
+
+[node name="Waypoint" type="Node3D" parent="World/Obstacle3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.59195)
+
+[node name="Obstacle6" parent="World" instance=ExtResource("4_s3nxb")]
+transform = Transform3D(16.2057, 1.40978, 0, -36.5702, 0.624728, 0, 0, 0, 12.132, -15.4698, 2.42034, 0)
+
+[node name="Obstacle7" parent="World" instance=ExtResource("4_s3nxb")]
+transform = Transform3D(16.2057, 1.40978, 0, -36.5702, 0.624728, 0, 0, 0, 12.132, 22.3068, 28.9922, 0)
+
+[node name="Obstacle4" parent="World" instance=ExtResource("4_s3nxb")]
+transform = Transform3D(16.1757, -1.41029, 0, 36.5834, 0.623572, 0, 0, 0, 12.132, 18.9613, 0.479871, 0)
+
+[node name="Obstacle8" parent="World" instance=ExtResource("4_s3nxb")]
+transform = Transform3D(16.1757, -1.41029, 0, 36.5834, 0.623572, 0, 0, 0, 12.132, -18.5583, 29.2271, 0)
+
+[node name="Finish" parent="." instance=ExtResource("4_p46of")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0969, 3.44964, 0)
+
+[node name="Start" parent="." instance=ExtResource("5_0evnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7036, 3.38552, 0.553398)

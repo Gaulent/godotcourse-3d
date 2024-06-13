@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccxb12knlinko"]
+
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="1_nknod"]
+[ext_resource type="PackedScene" uid="uid://qtty1m3xisd3" path="res://Scenes/Objects/player.tscn" id="2_16wbw"]
+[ext_resource type="PackedScene" uid="uid://10yvb4y37rex" path="res://Scenes/Objects/start.tscn" id="3_51ilm"]
+[ext_resource type="PackedScene" uid="uid://bjl6hrdip7gk2" path="res://Scenes/Objects/obstacle.tscn" id="3_vpld1"]
+[ext_resource type="PackedScene" uid="uid://c8ef2stuwtxne" path="res://Scenes/Objects/finish.tscn" id="4_keyqc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pbvk3"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_jf4vv"]
+sky_material = SubResource("ProceduralSkyMaterial_pbvk3")
+
+[sub_resource type="Environment" id="Environment_vyay0"]
+background_mode = 2
+sky = SubResource("Sky_jf4vv")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level 1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vyay0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.814437, -0.577212, -0.0593284, 0.0418768, 0.0435095, -0.998175, 0.57874, -0.815435, -0.0112639, -1.20162, 4.01497, 0)
+shadow_enabled = true
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.990329, 0.138741, 0, -0.138741, 0.990329, 0, 5.41343, 20)
+fov = 45.0
+script = ExtResource("1_nknod")
+target = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_16wbw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8338, 4.57751, 0)
+max_contacts_reported = 1
+contact_monitor = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -0.102602, -0.994723, 0, 0.994723, -0.102602, 0, 0, 0)
+spot_range = 14.7668
+spot_attenuation = 0.297302
+spot_angle = 22.5
+spot_angle_attenuation = 0.594603
+
+[node name="Start" parent="." instance=ExtResource("3_51ilm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8035, 3.39673, 0)
+
+[node name="Finish" parent="." instance=ExtResource("4_keyqc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5729, 2.9507, 0)
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Obstacle" parent="World" instance=ExtResource("3_vpld1")]
+transform = Transform3D(40, 0, 0, 0, 1.542, 0, 0, 0, 12.132, 0, 0, 0)
+
+[node name="Obstacle5" parent="World" instance=ExtResource("3_vpld1")]
+transform = Transform3D(52.0715, 0, 0, 0, 1.54208, 0, 0, 0, 12.1326, 1.38581, 15.3464, 0)
+
+[node name="Obstacle2" parent="World" instance=ExtResource("3_vpld1")]
+transform = Transform3D(16.1757, -1.41029, 0, 36.5834, 0.623572, 0, 0, 0, 12.132, -15.4698, -13.6271, 0)
+
+[node name="Obstacle6" parent="World" instance=ExtResource("3_vpld1")]
+transform = Transform3D(16.2057, 1.40978, 0, -36.5702, 0.624728, 0, 0, 0, 12.132, -15.4698, 2.42034, 0)
+
+[node name="Obstacle7" parent="World" instance=ExtResource("3_vpld1")]
+transform = Transform3D(16.2057, 1.40978, 0, -36.5702, 0.624728, 0, 0, 0, 12.132, -8.29046, 28.9922, 0)
+
+[node name="Obstacle3" parent="World" instance=ExtResource("3_vpld1")]
+transform = Transform3D(16.1757, -1.41029, 0, 36.5834, 0.623572, 0, 0, 0, 12.132, 2.02261, -13.2859, 0)
+
+[node name="Obstacle4" parent="World" instance=ExtResource("3_vpld1")]
+transform = Transform3D(16.1757, -1.41029, 0, 36.5834, 0.623572, 0, 0, 0, 12.132, 18.9613, 0.479871, 0)
+
+[node name="Obstacle8" parent="World" instance=ExtResource("3_vpld1")]
+transform = Transform3D(16.1757, -1.41029, 0, 36.5834, 0.623572, 0, 0, 0, 12.132, 8.36334, 29.2271, 0)

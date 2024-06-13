@@ -5,6 +5,7 @@ var initial_position:=position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	position = Vector3(initial_position.x + target.position.x,initial_position.y + target.position.y, initial_position.z)	
 	pass # Replace with function body.
 
 
