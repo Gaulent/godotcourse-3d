@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://74qfimcy44ma"]
+[gd_scene load_steps=11 format=3 uid="uid://74qfimcy44ma"]
 
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_ba1su"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_px3xl"]
 [ext_resource type="PackedScene" uid="uid://dmikcfwoflmkg" path="res://Scenes/World/floor.tscn" id="3_nf2t8"]
 [ext_resource type="PackedScene" uid="uid://cm2xryq8v4rao" path="res://Scenes/player.tscn" id="4_phqjt"]
+[ext_resource type="PackedScene" uid="uid://q7sihvgiomo6" path="res://Scenes/World/trap_ball.tscn" id="6_o12my"]
 [ext_resource type="PackedScene" uid="uid://drwi62rfkuq2t" path="res://Scenes/World/rotating_wall.tscn" id="6_wmgku"]
+[ext_resource type="PackedScene" uid="uid://bjdj7qgifls5s" path="res://Scenes/World/wall.tscn" id="7_qkkj3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g7cmy"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -49,8 +51,6 @@ environment = SubResource("Environment_f4utn")
 transform = Transform3D(-0.878817, -0.477159, -3.12839e-08, -1.29258e-08, -4.17565e-08, 1, -0.477159, 0.878817, 3.05287e-08, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Floor" parent="." instance=ExtResource("3_nf2t8")]
-
 [node name="Player" parent="." instance=ExtResource("4_phqjt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.61629, 0, 8.03271)
 
@@ -58,6 +58,82 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.61629, 0, 8.03271)
 transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 10, 6.265)
 fov = 45.0
 
-[node name="RotatingWall" parent="." instance=ExtResource("6_wmgku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.40675, 0, 7.71293)
+[node name="World" type="Node3D" parent="."]
+
+[node name="RotatingWall" parent="World" instance=ExtResource("6_wmgku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0729, 0, 5.34804)
 constant_angular_velocity = Vector3(0.261799, 0.261799, 0.261799)
+
+[node name="RotatingWall2" parent="World" instance=ExtResource("6_wmgku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.48395, 0, -1.43928)
+constant_angular_velocity = Vector3(0.261799, 0.261799, 0.261799)
+
+[node name="RotatingWall3" parent="World" instance=ExtResource("6_wmgku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.81059, 0, -2.79772)
+constant_angular_velocity = Vector3(0.261799, 0.261799, 0.261799)
+
+[node name="RotatingWall4" parent="World" instance=ExtResource("6_wmgku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.82596, 0, -1.75167)
+constant_angular_velocity = Vector3(0.261799, 0.261799, 0.261799)
+
+[node name="TrapBall" parent="World" instance=ExtResource("6_o12my")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79942, 5.05449, 6.01494)
+
+[node name="Wall" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4.91452, -10.0201, 0, 0.0808616)
+
+[node name="Floor" parent="World" instance=ExtResource("3_nf2t8")]
+
+[node name="Wall3" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4.91452, 9.93968, 0, 0.0808616)
+
+[node name="Wall4" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(-4.37114e-08, 0, 4.91452, 0, 1, 0, -1, 0, -2.1482e-07, -0.049468, 0, -10.2627)
+
+[node name="Wall5" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(-3.09086e-08, 3.09086e-08, 4.91452, 0.707107, 0.707107, 0, -0.707107, 0.707107, -2.1482e-07, -0.049468, 0.206043, 10.1863)
+
+[node name="Wall2" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(0.707107, -7.23259, 0, 0.707107, 7.23259, 0, 0, 0, 4.91452, -10.0201, 0, 0.0808616)
+
+[node name="TrapBall2" parent="World" instance=ExtResource("6_o12my")]
+transform = Transform3D(0.691841, -0.72205, 0, 0.72205, 0.691841, 0, 0, 0, 1, -13.4977, 5.79448, 2.0137)
+
+[node name="TrapBall3" parent="World" instance=ExtResource("6_o12my")]
+transform = Transform3D(0.691841, -0.72205, 0, 0.72205, 0.691841, 0, 0, 0, 1, -13.4977, 5.79448, 8.01302)
+
+[node name="TrapBall4" parent="World" instance=ExtResource("6_o12my")]
+transform = Transform3D(0.691841, -0.72205, 0, 0.72205, 0.691841, 0, 0, 0, 1, -13.4977, 5.79448, 5.17462)
+
+[node name="TrapBall5" parent="World" instance=ExtResource("6_o12my")]
+transform = Transform3D(0.691841, -0.72205, 0, 0.72205, 0.691841, 0, 0, 0, 1, -13.4977, 5.79448, -3.59349)
+
+[node name="TrapBall6" parent="World" instance=ExtResource("6_o12my")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33311, 5.05449, -2.43022)
+
+[node name="Wall6" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.675853, -4.12221, 0, 6.66549)
+
+[node name="Wall7" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.675853, -0.0616612, 0, 5.20142)
+
+[node name="Wall9" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.98213, 0, 1.60355)
+
+[node name="Wall10" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.71201, 0, 1.60355)
+
+[node name="Wall11" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.71201, 0, -3.13814)
+
+[node name="Wall12" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.71201, 0, -6.55876)
+
+[node name="Wall13" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.222466, 0, -5.25348)
+
+[node name="Wall14" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(-3.0243e-07, 0, 0.987395, 0, 5.64524, 0, -6.9188, 0, -4.31604e-08, 0.197579, 0, -8.79452)
+
+[node name="Wall8" parent="World" instance=ExtResource("7_qkkj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.675853, -0.0616612, 0, 0.204025)

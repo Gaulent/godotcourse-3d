@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://q7sihvgiomo6"]
+[gd_scene load_steps=7 format=3 uid="uid://q7sihvgiomo6"]
 
 [ext_resource type="Script" path="res://Scripts/TrapBall.gd" id="1_lknac"]
+[ext_resource type="Script" path="res://Scripts/GetHitComponent.gd" id="2_e2cn2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_x3yeb"]
 radius = 0.25
@@ -21,6 +22,10 @@ height = 50.0
 [node name="TrapBall" type="RigidBody3D"]
 freeze = true
 script = ExtResource("1_lknac")
+
+[node name="GetHitComponent" type="Node" parent="." node_paths=PackedStringArray("my_mesh")]
+script = ExtResource("2_e2cn2")
+my_mesh = NodePath("../MeshInstance3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.276566, 0)

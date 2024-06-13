@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjdj7qgifls5s"]
+[gd_scene load_steps=6 format=3 uid="uid://bjdj7qgifls5s"]
 
 [ext_resource type="Script" path="res://Scripts/wall.gd" id="1_0ejhy"]
+[ext_resource type="Script" path="res://Scripts/GetHitComponent.gd" id="2_vmr5w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gw31q"]
 size = Vector3(0.56553, 0.624571, 4.2762)
@@ -16,6 +17,10 @@ size = Vector3(0.56553, 0.624571, 4.2762)
 
 [node name="Wall" type="StaticBody3D"]
 script = ExtResource("1_0ejhy")
+
+[node name="GetHitComponent" type="Node" parent="." node_paths=PackedStringArray("my_mesh")]
+script = ExtResource("2_vmr5w")
+my_mesh = NodePath("../MeshInstance3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.343228, 0)
